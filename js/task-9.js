@@ -2,30 +2,73 @@
 // Loops through array, doesn't return anything — used for side effects like logging or DOM updates
 // 1. Log each number multiplied by 3.
 // [1, 2, 3, 4, 5] → logs 3, 6, 9, 12, 15
+[1, 2, 3, 4, 5].forEach(elem => {
+  console.log(elem * 3);
+});
 // 2. Log only strings from a mixed array.
 // [1, "hello", true, "world", 42] → logs "hello", "world"
+[1, 'hello', true, 'world', 42].forEach(elem => {
+  if (typeof elem === 'string') {
+    console.log(elem);
+  }
+});
 // 3. Log each person's full name from array of objects.
 // [{first: "John", last: "Doe"}, {first: "Jane", last: "Smith"}] → logs "John Doe", "Jane Smith"
+[
+  { first: 'John', last: 'Doe' },
+  { first: 'Jane', last: 'Smith' },
+].forEach(elem => {
+  console.log(`${elem.first} ${elem.last}`);
+});
 // 4. Count how many numbers are above 10 using forEach (use external counter).
 // [5, 15, 3, 20, 8, 12] → logs 3
+let counter = 0;
+
+[5, 15, 3, 20, 8, 12].forEach(elem => {
+  if (elem > 10) {
+    counter++;
+  }
+});
+
+console.log(counter);
 // 5. Log each item with its index.
 // ["apple", "banana", "cherry"] → logs "0: apple", "1: banana", "2: cherry"
+['apple', 'banana', 'cherry'].forEach((elem, index) => {
+  console.log(`${index}: ${elem}`);
+});
 
 // find()
 // Returns the FIRST element that matches condition, or undefined if not found
 // 1. Find the first number greater than 10.
 // findFirst([3, 7, 12, 5, 15]) → 12
+const findFirst = array => {
+  return array.find(elem => elem > 10);
+};
 // 2. Find the first string longer than 5 characters.
 // findLong(["hi", "hello", "javascript", "cat"]) → "javascript"
+const findLong = array => {
+  return array.find(elem => elem.length > 5);
+};
 // 3. Find a user by id.
 // findUser([{id: 1, name: "Alice"}, {id: 2, name: "Bob"}], 2) → {id: 2, name: "Bob"}
+const findUser = (array, id) => {
+  return array.find(elem => elem.id === id);
+};
 // 4. Find the first negative number.
 // findNegative([3, 5, -2, 8, -4]) → -2
+const findNegative = array => {
+  return array.find(elem => elem < 0);
+};
 // 5. Find a product by name.
 // findProduct([{name: "Apple", price: 1}, {name: "Laptop", price: 999}], "Laptop") → {name: "Laptop", price: 999}
+const findProduct = (array, searchingName) => {
+  return array.find(elem => elem.name === searchingName);
+};
 // 6. Find the first even number.
 // findEven([1, 3, 5, 4, 6]) → 4
-
+const findEven = array => {
+  return array.find(elem => elem % 2 === 0);
+};
 // filter()
 // Returns a NEW array with ALL elements that match condition
 // 1. Return only even numbers.
@@ -144,7 +187,7 @@ const countOccurrences = array => {
     acc[elem] = (acc[elem] ?? 0) + 1;
 
     return acc;
-  }, []);
+  }, {});
 };
 // 4. Flatten an array of arrays into one.
 // flattenArrays([[1, 2], [3, 4], [5, 6]]) → [1, 2, 3, 4, 5, 6]
@@ -155,5 +198,15 @@ const flattenArrays = array => {
 };
 // 5. Calculate total price of cart items.
 // cartTotal([{name: "Apple", price: 1.5, qty: 3}, {name: "Milk", price: 2, qty: 2}]) → 8.5
+const cartTotal = array => {
+  return array.reduce((acc, sum) => {
+    return acc + sum.price * sum.qty;
+  }, 0);
+};
 // 6. Build a string from array of words.
 // buildString(["Hello", "world", "how", "are", "you"]) → "Hello world how are you"
+const buildString = array => {
+  return array.reduce((acc, value) => {
+    return acc + ' ' + value;
+  });
+};
